@@ -90,19 +90,33 @@ console.log(brandname);
 */
 
 
-console.log('🎯 TODO: Sort by price');
+console.log('🎯 TODO 4: Sort by price');
 // 1. Create a function to sort the marketplace products by price
 // 2. Create a variable and assign it the list of products by price from lowest to highest
 // 3. Log the variable
 var marketplacebyPrice= marketplace.sort((a,b) => (a.price>b.price)?1:-1);
 console.log(marketplacebyPrice);
 
+function sortMarketplace()
+{var marketplacebyPrice= marketplace.sort((a,b) => (a.price>b.price)?1:-1);
+  console.log(marketplacebyPrice);}
+
+sortMarketplace();
+
+
 
 console.log('🎯 TODO: Sort by date');
 // 1. Create a function to sort the marketplace objects by products date
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
+var marketplacebyDate= marketplace.sort((a,b) => (Date.parse(a.date)>Date.parse(b.date))?1 :-1);
+console.log(marketplacebyDate);
 
+
+function sortMarketplaceDate()
+{var marketplacebyDate= marketplace.sort((a,b) => (Date.parse(a.date)<Date.parse(b.date))?1:-1);
+  console.log(marketplacebyDate);}
+sortMarketplaceDate();
 
 
 // 🎯 TODO: Filter a specific price range
