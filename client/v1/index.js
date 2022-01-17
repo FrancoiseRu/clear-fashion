@@ -26,14 +26,30 @@ console.log(MY_FAVORITE_BRANDS[0]);
  * 🌱
  */
 
-// 🎯 TODO: The cheapest t-shirt
+console.log('🎯 TODO: The cheapest t-shirt');
 // 0. I have 3 favorite brands stored in MY_FAVORITE_BRANDS variable
 // 1. Create a new variable and assign it the link of the cheapest t-shirt
 // I can find on these e-shops
 // 2. Log the variable
 
+let pricemin=1000;
+let linkmin='';
+for (let i=0; i<marketplace.length; i++){
+  if(marketplace[i].brand==MY_FAVORITE_BRANDS[0].name|marketplace[i].brand==MY_FAVORITE_BRANDS[1].name|marketplace[i].brand==MY_FAVORITE_BRANDS[2].name)
+  {
+    if(marketplace[i].name.includes('T-shirt'))
+    {
+      if(marketplace[i].price<pricemin)
+      {
+        pricemin= marketplace[i].price;
+        linkmin=marketplace[i].link;
+      }
+    }
+  }
+}
+console.log(linkmin);
 
-
+console.log('https://adresse.paris/t-shirts-et-polos/4238-t-shirt-ranelagh-1300000262026.html');
 
 
 /**
