@@ -130,14 +130,15 @@ console.log(products100_50);
 
 
 
-// 🎯 TODO: Average Basket
+console.log('🎯 TODO 7: Average Basket');
 // 1. Determine the average basket of the marketplace
 // 2. Log the average
 
 
-
-
-
+var moyenne=0;
+marketplace.forEach(item => moyenne+=item.price);
+moyenne =moyenne / marketplace.length;
+console.log(moyenne);
 /**
  * 🏎
  * We are almost done with the `marketplace` variable
