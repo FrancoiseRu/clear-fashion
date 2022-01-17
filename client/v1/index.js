@@ -66,20 +66,36 @@ console.log('🎯 TODO 2: Number of products');
 // 1. Create a variable and assign it the number of products
 // 2. Log the variable
 
-let numberOfProduct= marketplace.length;
+var numberOfProduct= marketplace.length;
 console.log(numberOfProduct);
 
 
-// 🎯 TODO: Brands name
+console.log('🎯 TODO 3: Brands name');
 // 1. Create a variable and assign it the list of brands name only
 // 2. Log the variable
 // 3. Log how many brands we have
+var brands=[];
+for (var i=0; i<marketplace.length; i++)
+{
+  if(brands.includes(marketplace[i].brand)==false)
+  {brands.push(marketplace[i].brand);}
+}
+console.log(brands);
+console.log(brands.length);
+
+/*meilleure notation
+var brandname=[];
+marketplace.forEach(obj =>brandname.push(obj.brand));
+console.log(brandname);
+*/
 
 
-// 🎯 TODO: Sort by price
+console.log('🎯 TODO: Sort by price');
 // 1. Create a function to sort the marketplace products by price
 // 2. Create a variable and assign it the list of products by price from lowest to highest
 // 3. Log the variable
+marketplace.sort((a,b) => (a.price>b.price)?1:-1);
+console.log(marketplace.price);
 
 
 // 🎯 TODO: Sort by date
