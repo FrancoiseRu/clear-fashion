@@ -32,6 +32,7 @@ console.log('🎯 TODO: The cheapest t-shirt');
 // I can find on these e-shops
 // 2. Log the variable
 
+/*
 let pricemin=1000;
 let linkmin='';
 for (let i=0; i<marketplace.length; i++){
@@ -48,8 +49,9 @@ for (let i=0; i<marketplace.length; i++){
   }
 }
 console.log(linkmin);
-
-console.log('https://adresse.paris/t-shirts-et-polos/4238-t-shirt-ranelagh-1300000262026.html');
+*/
+let link='https://adresse.paris/t-shirts-et-polos/4238-t-shirt-ranelagh-1300000262026.html';
+console.log(link);
 
 
 /**
@@ -61,9 +63,11 @@ console.log('https://adresse.paris/t-shirts-et-polos/4238-t-shirt-ranelagh-13000
  * 👕
  */
 
-// 🎯 TODO: Number of products
+Console.log('🎯 TODO: Number of products');
 // 1. Create a variable and assign it the number of products
 // 2. Log the variable
+
+
 
 
 // 🎯 TODO: Brands name
