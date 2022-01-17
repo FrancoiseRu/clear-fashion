@@ -26,7 +26,7 @@ console.log(MY_FAVORITE_BRANDS[0]);
  * 🌱
  */
 
-console.log('🎯 TODO: The cheapest t-shirt');
+console.log('🎯 TODO 1: The cheapest t-shirt');
 // 0. I have 3 favorite brands stored in MY_FAVORITE_BRANDS variable
 // 1. Create a new variable and assign it the link of the cheapest t-shirt
 // I can find on these e-shops
@@ -62,12 +62,12 @@ console.log(link);
  * The variable is loaded by the file data.js
  * 👕
  */
-
-Console.log('🎯 TODO: Number of products');
+console.log('🎯 TODO 2: Number of products');
 // 1. Create a variable and assign it the number of products
 // 2. Log the variable
 
-
+let numberOfProduct= marketplace.length;
+console.log(numberOfProduct);
 
 
 // 🎯 TODO: Brands name
