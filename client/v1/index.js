@@ -94,14 +94,15 @@ console.log('🎯 TODO: Sort by price');
 // 1. Create a function to sort the marketplace products by price
 // 2. Create a variable and assign it the list of products by price from lowest to highest
 // 3. Log the variable
-marketplace.sort((a,b) => (a.price>b.price)?1:-1);
-console.log(marketplace.price);
+var marketplacebyPrice= marketplace.sort((a,b) => (a.price>b.price)?1:-1);
+console.log(marketplacebyPrice);
 
 
-// 🎯 TODO: Sort by date
+console.log('🎯 TODO: Sort by date');
 // 1. Create a function to sort the marketplace objects by products date
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
+
 
 
 // 🎯 TODO: Filter a specific price range
