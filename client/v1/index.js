@@ -146,7 +146,7 @@ console.log(moyenne);
  * 🏎
  */
 
-// 🎯 TODO: Products by brands
+console.log('🎯 TODO: Products by brands');
 // 1. Create an object called `brands` to manipulate products by brand name
 // The key is the brand name
 // The value is the array of products
@@ -161,12 +161,26 @@ console.log(moyenne);
 //
 // 2. Log the variable
 // 3. Log the number of products by brands
-
+var const_brands={};
+for (var i=0; i<brands.length; i++)
+{
+  const_brands[brands[i]]=[];
+}
+for (var i=0; i<marketplace.length; i++)
+{
+  const_brands[marketplace[i].brand].push(marketplace[i])
+}
+console.log(const_brands);
 
 // 🎯 TODO: Sort by price for each brand
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
-
+var newconst_brands=const_brands;
+for (var i=0; i<brands.length; i++)
+{
+  newconst_brands[brands[i]]= const_brands[brands[i]].sort((a,b) => (a.price<b.price)?1:-1);
+}
+console.log(newconst_brands);
 
 // 🎯 TODO: Sort by date for each brand
 // 1. For each brand, sort the products by date, from old to recent
