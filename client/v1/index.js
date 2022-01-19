@@ -109,7 +109,7 @@ console.log('🎯 TODO 5: Sort by date');
 // 1. Create a function to sort the marketplace objects by products date
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
-var marketplacebyDate= marketplace.sort((a,b) => (Date.parse(a.date)>Date.parse(b.date))?1 :-1);
+var marketplacebyDate= marketplace.sort((a,b) => (Date.parse(a.date)<Date.parse(b.date))?1 :-1);
 console.log(marketplacebyDate);
 
 
@@ -146,7 +146,7 @@ console.log(moyenne);
  * 🏎
  */
 
-console.log('🎯 TODO: Products by brands');
+console.log('🎯 TODO 8: Products by brands');
 // 1. Create an object called `brands` to manipulate products by brand name
 // The key is the brand name
 // The value is the array of products
@@ -172,22 +172,26 @@ for (var i=0; i<marketplace.length; i++)
 }
 console.log(const_brands);
 
-// 🎯 TODO: Sort by price for each brand
+console.log('🎯 TODO 9: Sort by price for each brand');
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
-var newconst_brands=const_brands;
+var const_brandsbyPrice=const_brands;
 for (var i=0; i<brands.length; i++)
 {
-  newconst_brands[brands[i]]= const_brands[brands[i]].sort((a,b) => (a.price<b.price)?1:-1);
+  const_brandsbyPrice[brands[i]]= const_brands[brands[i]].sort((a,b) => (a.price>b.price)?1:-1);
 }
-console.log(newconst_brands);
+console.log(const_brandsbyPrice);
 
-// 🎯 TODO: Sort by date for each brand
+
+console.log('🎯 TODO 10: Sort by date for each brand')
 // 1. For each brand, sort the products by date, from old to recent
 // 2. Log the sort
-
-
-
+var const_brandsbyDate=const_brands;
+for (var i=0; i<brands.length; i++)
+{
+  const_brandsbyDate[brands[i]]= const_brands[brands[i]].sort((a,b) => (Date.parse(a.date)>Date.parse(b.date))?1 :-1);
+}
+console.log(const_brandsbyDate);
 
 
 /**
@@ -200,7 +204,13 @@ console.log(newconst_brands);
 // 🎯 TODO: Compute the p90 price value
 // 1. Compute the p90 price value of each brand
 // The p90 value (90th percentile) is the lower value expected to be exceeded in 90% of the products
-
+/*
+var p90=[];
+for (var i=0; i<brands.length; i++)
+{
+p90.push(const_brandsbyPrice[brands[i]][Math.floor(const_brandsbyPrice[brands[i]].length*0.9)]);
+}
+console.log(p90);*/
 
 
 
