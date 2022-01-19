@@ -283,24 +283,30 @@ const COTELE_PARIS = [
   }
 ]
 
+
 // 🎯 TODO: New released products
 // // 1. Log if we have new products only (true or false)
 // // A new product is a product `released` less than 2 weeks.
-
+const newProducts = COTELE_PARIS.every(element =>(Math.abs(Date.now()-Date.parse(element.released))/(1000 * 60 * 60 * 24))<14);
+console.log(newProducts);
 
 // 🎯 TODO: Reasonable price
 // // 1. Log if coteleparis is a reasonable price shop (true or false)
 // // A reasonable price if all the products are less than 100€
-
+const reasonablePrice = COTELE_PARIS.every(element =>(element.price<100));
+console.log(reasonablePrice);
 
 // 🎯 TODO: Find a specific product
 // 1. Find the product with the uuid `b56c6d88-749a-5b4c-b571-e5b5c6483131`
 // 2. Log the product
+var index = COTELE_PARIS.indexOf()
 
 
 // 🎯 TODO: Delete a specific product
 // 1. Delete the product with the uuid `b56c6d88-749a-5b4c-b571-e5b5c6483131`
 // 2. Log the new list of product
+COTELE_PARIS.splice(index,1);
+console.log(COTELE_PARIS);
 
 // 🎯 TODO: Save the favorite product
 let blueJacket = {
@@ -316,6 +322,8 @@ let jacket = blueJacket;
 jacket.favorite = true;
 
 // 1. Log `blueJacket` and `jacket` variables
+console.log(blueJacket);
+console.log(jacket);
 // 2. What do you notice?
 
 blueJacket = {
@@ -325,7 +333,8 @@ blueJacket = {
 };
 
 // 3. Update `jacket` property with `favorite` to true WITHOUT changing blueJacket properties
-
+jacket.favorite=true;
+console.log(jacket);
 
 
 
