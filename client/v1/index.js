@@ -201,7 +201,7 @@ console.log(const_brandsbyDate);
  * 💶
  */
 
-// 🎯 TODO: Compute the p90 price value
+// 🎯 TODO 11: Compute the p90 price value
 // 1. Compute the p90 price value of each brand
 // The p90 value (90th percentile) is the lower value expected to be exceeded in 90% of the products
 /*
@@ -283,30 +283,32 @@ const COTELE_PARIS = [
   }
 ]
 
-
-// 🎯 TODO: New released products
+console.log('🎯 TODO 12: New released products');
 // // 1. Log if we have new products only (true or false)
 // // A new product is a product `released` less than 2 weeks.
 const newProducts = COTELE_PARIS.every(element =>(Math.abs(Date.now()-Date.parse(element.released))/(1000 * 60 * 60 * 24))<14);
 console.log(newProducts);
 
-// 🎯 TODO: Reasonable price
+console.log('🎯 TODO 13: Reasonable price');
 // // 1. Log if coteleparis is a reasonable price shop (true or false)
 // // A reasonable price if all the products are less than 100€
 const reasonablePrice = COTELE_PARIS.every(element =>(element.price<100));
 console.log(reasonablePrice);
 
-// 🎯 TODO: Find a specific product
+console.log('🎯 TODO 14: Find a specific product');
 // 1. Find the product with the uuid `b56c6d88-749a-5b4c-b571-e5b5c6483131`
 // 2. Log the product
-var index = COTELE_PARIS.indexOf()
+var index = COTELE_PARIS.findIndex(element => (element.uuid === 'b56c6d88-749a-5b4c-b571-e5b5c6483131'));
+console.log(COTELE_PARIS[index]);
 
-
-// 🎯 TODO: Delete a specific product
+console.log('🎯 TODO 15: Delete a specific product');
 // 1. Delete the product with the uuid `b56c6d88-749a-5b4c-b571-e5b5c6483131`
 // 2. Log the new list of product
-COTELE_PARIS.splice(index,1);
+console.log('length before: '+COTELE_PARIS.length);
+var newCOTELE_PARIS= COTELE_PARIS; 
+newCOTELE_PARIS.splice(index,1);
 console.log(COTELE_PARIS);
+console.log('length after: '+COTELE_PARIS.length);
 
 // 🎯 TODO: Save the favorite product
 let blueJacket = {
