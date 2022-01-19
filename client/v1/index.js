@@ -175,10 +175,10 @@ console.log(const_brands);
 console.log('🎯 TODO 9: Sort by price for each brand');
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
-var const_brandsbyPrice=const_brands;
+var const_brandsbyPrice = JSON.parse(JSON.stringify(const_brands));
 for (var i=0; i<brands.length; i++)
 {
-  const_brandsbyPrice[brands[i]]= const_brands[brands[i]].sort((a,b) => (a.price>b.price)?1:-1);
+  const_brandsbyPrice[brands[i]]= const_brandsbyPrice[brands[i]].sort((a,b) => (a.price<b.price)?1:-1);
 }
 console.log(const_brandsbyPrice);
 
@@ -186,10 +186,10 @@ console.log(const_brandsbyPrice);
 console.log('🎯 TODO 10: Sort by date for each brand')
 // 1. For each brand, sort the products by date, from old to recent
 // 2. Log the sort
-var const_brandsbyDate=const_brands;
+var const_brandsbyDate = JSON.parse(JSON.stringify(const_brands));
 for (var i=0; i<brands.length; i++)
 {
-  const_brandsbyDate[brands[i]]= const_brands[brands[i]].sort((a,b) => (Date.parse(a.date)>Date.parse(b.date))?1 :-1);
+  const_brandsbyDate[brands[i]]= const_brandsbyDate[brands[i]].sort((a,b) => (Date.parse(a.date)>Date.parse(b.date))?1 :-1);
 }
 console.log(const_brandsbyDate);
 
