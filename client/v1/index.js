@@ -348,10 +348,8 @@ console.log(blueJacket);
  * The End
  * 🎬
  */
-
-// 🎯 TODO: Save in localStorage
+console.log('🎯 TODO 16: Save in localStorage');
 // 1. Save MY_FAVORITE_BRANDS in the localStorage
 // 2. log the localStorage
-
 MY_FAVORITE_BRANDS.forEach(element => localStorage.setItem(element.name, element.url));
 console.log(localStorage);
