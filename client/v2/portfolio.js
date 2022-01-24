@@ -39,12 +39,17 @@ const fetchProducts = async (page = 1, size = 12) => {
       console.error(body);
       return {currentProducts, currentPagination};
     }
+    let listBrand=[];
+    (body.data.result).foreach(element => listBrand.push(element.brand))
+    console.log(listBrand);
 
     return body.data;
   } catch (error) {
     console.error(error);
     return {currentProducts, currentPagination};
   }
+
+
 };
 
 /**
@@ -65,7 +70,6 @@ const renderProducts = products => {
     `;
     })
     .join('');
-
   div.innerHTML = template;
   fragment.appendChild(div);
   sectionProducts.innerHTML = '<h2>Products</h2>';
@@ -114,28 +118,12 @@ const render = (products, pagination) => {
  * @type {[type]}
  */
 selectShow.addEventListener('change', event => {
-  //currentPagination.pageCount=parseInt(event.target.value);
-  console.log(currentPagination.currentPage);
-  console.log(currentPagination.pageCount);
-  console.log(parseInt(event.target.value));
-
-
   fetchProducts(currentPagination.currentPage,parseInt(event.target.value))
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination));
-
-    console.log(currentPagination.currentPage);
-    console.log(currentPagination.pageCount);
-    console.log(parseInt(event.target.value));
 });
 
 selectPage.addEventListener('change', event => {
-  console.log(currentPagination.currentPage);
-  console.log(currentPagination.pageCount);
-  console.log(currentPagination.currentProducts);
-  console.log(parseInt(event.target.value));
-
-
   fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination));
