@@ -84,6 +84,10 @@ const renderPagination = pagination => {
 
   selectPage.innerHTML = options;
   selectPage.selectedIndex = currentPage - 1;
+
+  console.log(currentPage);
+  console.log(pageCount);
+  console.log(selectPage);
 };
 
 /**
@@ -121,3 +125,9 @@ document.addEventListener('DOMContentLoaded', () =>
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination))
 );
+
+selectPage.addEventListener('change', event => {
+  fetchProducts(parseInt(event.target.value),currentPagination.currentProducts)
+    .then(setCurrentProducts)
+    .then(() => render(currentProducts, currentPagination));
+});
