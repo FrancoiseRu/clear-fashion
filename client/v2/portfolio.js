@@ -8,6 +8,7 @@ let currentPagination = {};
 // inititiqte selectors
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
+const selectBrand = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 
@@ -85,9 +86,7 @@ const renderPagination = pagination => {
   selectPage.innerHTML = options;
   selectPage.selectedIndex = currentPage - 1;
 
-  console.log(currentPage);
-  console.log(pageCount);
-  console.log(selectPage);
+
 };
 
 /**
@@ -115,7 +114,29 @@ const render = (products, pagination) => {
  * @type {[type]}
  */
 selectShow.addEventListener('change', event => {
-  fetchProducts(currentPagination.currentPage, parseInt(event.target.value))
+  //currentPagination.pageCount=parseInt(event.target.value);
+  console.log(currentPagination.currentPage);
+  console.log(currentPagination.pageCount);
+  console.log(parseInt(event.target.value));
+
+
+  fetchProducts(currentPagination.currentPage,parseInt(event.target.value))
+    .then(setCurrentProducts)
+    .then(() => render(currentProducts, currentPagination));
+
+    console.log(currentPagination.currentPage);
+    console.log(currentPagination.pageCount);
+    console.log(parseInt(event.target.value));
+});
+
+selectPage.addEventListener('change', event => {
+  console.log(currentPagination.currentPage);
+  console.log(currentPagination.pageCount);
+  console.log(currentPagination.currentProducts);
+  console.log(parseInt(event.target.value));
+
+
+  fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination));
 });
@@ -126,8 +147,4 @@ document.addEventListener('DOMContentLoaded', () =>
     .then(() => render(currentProducts, currentPagination))
 );
 
-selectPage.addEventListener('change', event => {
-  fetchProducts(parseInt(event.target.value),currentPagination.currentProducts)
-    .then(setCurrentProducts)
-    .then(() => render(currentProducts, currentPagination));
-});
+
