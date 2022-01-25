@@ -114,7 +114,6 @@ const renderIndicators = pagination => {
     (brand) =>`<option value="${brand}">${brand}</option>`
   ).join('');
   selectBrands.innerHTML = options;
-  console.log(brand);
   selectBrands.selectedIndex = brand.indexOf(brandSelected);
 };
 /*
@@ -125,6 +124,19 @@ const render = (products, pagination) => {
   renderIndicators(pagination);
 
 };*/
+
+function newrelease(products){
+  const newProductRelease = [];
+  for (var i=0; i<products.length; i++)
+  {
+    if((Math.abs(Date.now()-Date.parse(products[i].released))/(1000 * 60 * 60 * 24))<14)
+    {
+      newProductRelease.push(products[i]);
+    }
+  }
+  return newProductRelease;
+}
+
 const render2 = (products, pagination,brandSelected) => {
   let brandstot=['No brand selected'];
     for (let step=0;step<products.length;step++)
@@ -136,13 +148,15 @@ const render2 = (products, pagination,brandSelected) => {
   var const_brands={};
 for (var i=0; i<products.length; i++)
 {
-  //console.log(products[i])
   const_brands[products[i].brand]=[];
 }
 for (var i=0; i<products.length; i++)
 {
   const_brands[products[i].brand].push(products[i])
 }
+if (buttonrel===true){products=newrelease(products)
+  renderProducts(products);}
+
 if(brandSelected=='No brand selected')
 {
   renderProducts(products);
@@ -178,7 +192,6 @@ selectPage.addEventListener('change', event => {
 });
 
 selectBrands.addEventListener('change', event => {
-  console.log((event.target.value));
   fetchProducts(currentPagination.currentPage,currentPagination.pageSize)
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,event.target.value))
@@ -190,5 +203,17 @@ document.addEventListener('DOMContentLoaded', () =>
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,'No brand selected'))
 );
+
+var buttonrel=false;
+function changeboolrel()
+{ if (buttonrel==false){buttonrel=true}
+else buttonrel=false;
+console.log(buttonrel)
+{
+  fetchProducts(currentPagination.currentPage, currentPagination.pageSize)
+    .then(setCurrentProducts)
+    .then(() => render2(currentProducts, currentPagination,"No brand selected"));
+};}
+
 
 
