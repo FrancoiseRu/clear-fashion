@@ -139,6 +139,16 @@ function percentile(data, q) {
 };
 
 /**
+ * Render last released date indicator
+ * @param  {Object} last
+ */
+ const render_last_released_date = last => {
+  last=sortbydateDesc(last);
+  const last_date = last[0].released;
+  spanLastReleasedDate.innerHTML = last_date;
+};
+
+/**
  * Render brand selector
  * @param  {Object} brand
  * @param  {Object} brandSelected
@@ -229,6 +239,7 @@ const render2 = (products, pagination,brandSelected) => {
   renderIndicatorsp50(products);
   renderIndicatorsp90(products);
   renderIndicatorsp95(products);
+  render_last_released_date(products);
   renderBrands(brandstot,brandSelected)
 }
 /**
@@ -268,7 +279,7 @@ selectSort.addEventListener('change',event =>{
     fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
     .then(setCurrentProducts)
     .then(() => render2(sortbydateAsc(currentProducts), currentPagination,'No brand selected'))}
-  else  if(event.target.value=="date-desc"){
+  else if(event.target.value=="date-desc"){
     fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
     .then(setCurrentProducts)
     .then(() => render2(sortbydateDesc(currentProducts), currentPagination,'No brand selected'))}
@@ -305,6 +316,3 @@ else {buttonReasonablebool=false;}
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,"No brand selected"));
 };}
-
-
-
