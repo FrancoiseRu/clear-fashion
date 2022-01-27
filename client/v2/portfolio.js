@@ -3,6 +3,8 @@
 // current products on the page
 let currentProducts = [];
 let currentPagination = {};
+let favouriteuuid =[];
+let favouritelist=[];
 // inititiqte selectors
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
@@ -46,6 +48,8 @@ const fetchProducts = async (page = 1, size = 12) => {
     return {currentProducts, currentPagination};
   }
 };
+function favourite(uuidElement)
+{favouriteuuid.push(uuidElement);}
 /**
  * Render list of products
  * @param  {Array} products
@@ -60,6 +64,7 @@ const renderProducts = products => {
         <span>${product.brand}</span>
         <a href="${product.link}" target="_blank">${product.name}</a>
         <span>${product.price}</span>
+        <button onclick=favourite("${product.uuid}")>fav</button>
       </div>
     `;
     })
@@ -209,11 +214,28 @@ function sortbydateAsc(products){
 
 
 const render2 = (products, pagination,brandSelected) => {
-  let brandstot=['No brand selected'];
-    for (let step=0;step<products.length;step++)
+  if (buttonReleasedbool==true)
+    {products=newrelease(products);}
+  if(buttonReasonablebool==true)
+    {products=reasonable(products);}
+  if (buttonfavouritebool==true)
     {
-      brandstot.push(products[step].brand);
+      favouritelist=[];
+      favouriteuuid=[ ... new Set(favouriteuuid)]
+      favouriteuuid.forEach(element => {
+        products.forEach(elemuuid=> {
+          if (element==elemuuid.uuid & favouritelist.indexOf(elemuuid) <0)
+          {favouritelist.push(elemuuid);}
+        })  
+      });
+      favouritelist=[ ... new Set(favouritelist)]
+      products=favouritelist;
     }
+  let brandstot=['No brand selected'];
+  for (let step=0;step<products.length;step++)
+  {
+    brandstot.push(products[step].brand);
+  }
   brandstot=[ ... new Set(brandstot)]
  
   var const_brands={};
@@ -225,12 +247,8 @@ const render2 = (products, pagination,brandSelected) => {
   {
     const_brands[products[i].brand].push(products[i]);
   }
-  if (buttonReleasedbool==true)
-    {products=newrelease(products);}
-  if(buttonReasonablebool==true)
-    {products=reasonable(products);}
   if(brandSelected!='No brand selected' )
-    {products=const_brands[brandSelected];}
+  {products=const_brands[brandSelected];}
 
   renderProducts(products);
   renderPagination(pagination);
@@ -311,6 +329,16 @@ var buttonReasonablebool=false;
 function buttonReasonable()
 { if (buttonReasonablebool==false){buttonReasonablebool=true;}
 else {buttonReasonablebool=false;}
+{
+  fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
+    .then(setCurrentProducts)
+    .then(() => render2(currentProducts, currentPagination,"No brand selected"));
+};}
+
+var buttonfavouritebool=false
+function buttonFavourite()
+{ if (buttonfavouritebool==false){buttonfavouritebool=true;}
+else {buttonfavouritebool=false;}
 {
   fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
     .then(setCurrentProducts)
