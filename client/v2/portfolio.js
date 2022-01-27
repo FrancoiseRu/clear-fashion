@@ -116,48 +116,47 @@ function newrelease(products){
   for (var i=0; i<products.length; i++)
   {
     if((Math.abs(Date.now()-Date.parse(products[i].released))/(1000 * 60 * 60 * 24))<14)
-    {
-      newProductRelease.push(products[i]);
-    }
+    {newProductRelease.push(products[i]);}
   }
   return newProductRelease;
 }
+
+function reasonable(products){
+  let reasonableProducts = [];
+  for (var i=0; i<products.length; i++)
+  {
+    if(products[i].price<50)
+    {reasonableProducts.push(products[i]);}
+  }
+  return reasonableProducts;
+}
+
 
 const render2 = (products, pagination,brandSelected) => {
   let brandstot=['No brand selected'];
     for (let step=0;step<products.length;step++)
     {
       brandstot.push(products[step].brand);
-       
     }
   brandstot=[ ... new Set(brandstot)]
  
   var const_brands={};
 for (var i=0; i<products.length; i++)
 {
-
   const_brands[products[i].brand]=[];
 }
 for (var i=0; i<products.length; i++)
 {
-  const_brands[products[i].brand].push(products[i])
- 
+  const_brands[products[i].brand].push(products[i]);
 }
-if (buttonrel===true){
-  renderProducts(newrelease(products));
-}
-else{
-  if(brandSelected=='No brand selected' )
-  {
-    renderProducts(products);
-  }
-  else
-  {
-    renderProducts(const_brands[brandSelected]);
-  }
-}
-  
+if (buttonReleasedbool==true)
+{products=newrelease(products);}
+if(buttonReasonablebool==true)
+{products=reasonable(products);}
+if(brandSelected!='No brand selected' )
+{products=const_brands[brandSelected];}
 
+  renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
   renderBrands(brandstot,brandSelected)
@@ -174,24 +173,14 @@ selectShow.addEventListener('change', event => {
     .then(() => render2(currentProducts, currentPagination,'No brand selected'));
 });
 selectPage.addEventListener('change', event => {
-  console.log('page');
-  console.log(currentPagination.pageSize);
-  currentPagination.pageSize=currentPageSize(currentPagination.pageSize);
-  console.log(currentPagination.pageSize);
-  fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
+  fetchProducts(parseInt(event.target.value),parseInt(selectShow.value))
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,'No brand selected'));
    
 });
-function currentPageSize(PageSizecurrent)
-{
-  if(PageSizecurrent>24 | PageSizecurrent==0){return 48;}
-  else if(PageSizecurrent>12){return 24;}
-  else {return 12;}
-}
 
 selectBrands.addEventListener('change', event => {
-  fetchProducts(currentPagination.currentPage,currentPagination.pageSize)
+  fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,event.target.value))
 });
@@ -202,16 +191,24 @@ document.addEventListener('DOMContentLoaded', () =>
     .then(() => render2(currentProducts, currentPagination,'No brand selected'))
 );
 
-var buttonrel=false;
+var buttonReleasedbool=false;
 function buttonReleased()
-{ if (buttonrel==false){buttonrel=true}
-else buttonrel=false;
-console.log(buttonrel)
+{ if (buttonReleasedbool==false){buttonReleasedbool=true;}
+else {buttonReleasedbool=false;}
 {
-  fetchProducts(currentPagination.currentPage, currentPagination.pageSize)
+  fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,'No brand selected'));
-    
+};}
+
+var buttonReasonablebool=false;
+function buttonReasonable()
+{ if (buttonReasonablebool==false){buttonReasonablebool=true;}
+else {buttonReasonablebool=false;}
+{
+  fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
+    .then(setCurrentProducts)
+    .then(() => render2(currentProducts, currentPagination,"No brand selected"));
 };}
 
 
