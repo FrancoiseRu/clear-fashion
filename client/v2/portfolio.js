@@ -10,6 +10,7 @@ const selectBrands = document.querySelector('#brand-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const spanNbNewProducts = document.querySelector('#nbNewProducts');
+const selectSort = document.querySelector('#sort-select')
 const span50 = document.querySelector('#p50');
 const span90 = document.querySelector('#p90');
 const span95 = document.querySelector('#p95');
@@ -90,6 +91,14 @@ const renderIndicators = pagination => {
   spanNbProducts.innerHTML = count;
 };
 /**
+ * Render new products selector
+ * @param  {Object} paginationNew
+ */
+  const renderIndicatorsNew = paginationNew => {
+  const countNew = paginationNew.length;
+  spanNbNewProducts.innerHTML = countNew;
+};
+/**
  * Render brand selector
  * @param  {Object} brand
  * @param  {Object} brandSelected
@@ -159,6 +168,7 @@ if(brandSelected!='No brand selected' )
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
+  renderIndicatorsNew(newrelease(products));
   renderBrands(brandstot,brandSelected)
 }
 /**
@@ -183,6 +193,13 @@ selectBrands.addEventListener('change', event => {
   fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,event.target.value))
+});
+
+selectSort.addEventListener('change',event =>{
+  fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
+  .then(setCurrentProducts)
+  .then(() => render2(currentProducts, currentPagination,event.target.value))
+
 });
 
 document.addEventListener('DOMContentLoaded', () =>
