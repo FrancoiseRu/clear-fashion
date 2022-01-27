@@ -138,8 +138,6 @@ function percentile(data, q) {
   span95.innerHTML = count95.toFixed(2);
 };
 
-
-
 /**
  * Render brand selector
  * @param  {Object} brand
@@ -183,6 +181,23 @@ function reasonable(products){
 }
 
 
+function sortbypriceDesc(products){
+  products=products.sort((a,b) => (a.price<b.price)?1:-1);
+  return products;}
+  
+function sortbypriceAsc(products){
+  products=products.sort((a,b) => (a.price>b.price)?1:-1);
+  return products;}
+  
+function sortbydateDesc(products){
+    products=products.sort((a,b) => (Date.parse(a.released)<Date.parse(b.released))?1:-1);
+    return products;}
+
+function sortbydateAsc(products){
+    products=products.sort((a,b) => (Date.parse(a.released)>Date.parse(b.released))?1:-1);
+    return products;}
+
+
 const render2 = (products, pagination,brandSelected) => {
   let brandstot=['No brand selected'];
     for (let step=0;step<products.length;step++)
@@ -192,20 +207,20 @@ const render2 = (products, pagination,brandSelected) => {
   brandstot=[ ... new Set(brandstot)]
  
   var const_brands={};
-for (var i=0; i<products.length; i++)
-{
-  const_brands[products[i].brand]=[];
-}
-for (var i=0; i<products.length; i++)
-{
-  const_brands[products[i].brand].push(products[i]);
-}
-if (buttonReleasedbool==true)
-{products=newrelease(products);}
-if(buttonReasonablebool==true)
-{products=reasonable(products);}
-if(brandSelected!='No brand selected' )
-{products=const_brands[brandSelected];}
+  for (var i=0; i<products.length; i++)
+  {
+    const_brands[products[i].brand]=[];
+  }
+  for (var i=0; i<products.length; i++)
+  {
+    const_brands[products[i].brand].push(products[i]);
+  }
+  if (buttonReleasedbool==true)
+    {products=newrelease(products);}
+  if(buttonReasonablebool==true)
+    {products=reasonable(products);}
+  if(brandSelected!='No brand selected' )
+    {products=const_brands[brandSelected];}
 
   renderProducts(products);
   renderPagination(pagination);
@@ -241,11 +256,29 @@ selectBrands.addEventListener('change', event => {
 });
 
 selectSort.addEventListener('change',event =>{
-  fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
-  .then(setCurrentProducts)
-  .then(() => render2(currentProducts, currentPagination,event.target.value))
-
+  if(event.target.value=="price-asc"){
+      fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
+      .then(setCurrentProducts)
+      .then(() => render2(sortbypriceAsc(currentProducts), currentPagination,'No brand selected'))}
+  else if(event.target.value=="price-desc"){
+    fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
+    .then(setCurrentProducts)
+    .then(() => render2(sortbypriceDesc(currentProducts), currentPagination,'No brand selected'))}
+  else if(event.target.value=="date-asc"){
+    fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
+    .then(setCurrentProducts)
+    .then(() => render2(sortbydateAsc(currentProducts), currentPagination,'No brand selected'))}
+  else  if(event.target.value=="date-desc"){
+    fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
+    .then(setCurrentProducts)
+    .then(() => render2(sortbydateDesc(currentProducts), currentPagination,'No brand selected'))}
+  else {
+    fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
+    .then(setCurrentProducts)
+    .then(() => render2(currentProducts, currentPagination,'No brand selected'))
+  }
 });
+
 
 document.addEventListener('DOMContentLoaded', () =>
   fetchProducts()
