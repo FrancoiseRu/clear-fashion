@@ -98,6 +98,48 @@ const renderIndicators = pagination => {
   const countNew = paginationNew.length;
   spanNbNewProducts.innerHTML = countNew;
 };
+
+function percentile(data, q) {
+  var pos = ((data.length) - 1) * q;
+  var base = Math.floor(pos);
+  var rest = pos - base;
+  if( (data[base+1]!==undefined) ) {
+    return data[base].price + rest * (data[base+1].price - data[base].price);
+  } else {
+    return data[base].price;
+  }
+}
+/**
+ * Render p50 indicator
+ * @param  {Object} p50
+ */
+ const renderIndicatorsp50 = p50 => {
+  p50=p50.sort((a,b) => (a.price<b.price)?1:-1);
+  const count50 = percentile(p50,0.5);
+  span50.innerHTML = count50.toFixed(2);
+};
+/**
+ * Render p90 indicator
+ * @param  {Object} p90
+ */
+ const renderIndicatorsp90 = p90 => {
+  p90=p90.sort((a,b) => (a.price<b.price)?1:-1);
+  const count90 = percentile(p90,0.9);
+  span90.innerHTML = count90.toFixed(2);
+};
+
+/**
+ * Render p95 indicator
+ * @param  {Object} p90
+ */
+ const renderIndicatorsp95 = p95 => {
+  p95=p95.sort((a,b) => (a.price<b.price)?1:-1);
+  const count95 = percentile(p95,0.95);
+  span95.innerHTML = count95.toFixed(2);
+};
+
+
+
 /**
  * Render brand selector
  * @param  {Object} brand
@@ -169,6 +211,9 @@ if(brandSelected!='No brand selected' )
   renderPagination(pagination);
   renderIndicators(pagination);
   renderIndicatorsNew(newrelease(products));
+  renderIndicatorsp50(products);
+  renderIndicatorsp90(products);
+  renderIndicatorsp95(products);
   renderBrands(brandstot,brandSelected)
 }
 /**
