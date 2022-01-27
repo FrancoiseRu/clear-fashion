@@ -3,17 +3,17 @@
 // current products on the page
 let currentProducts = [];
 let currentPagination = {};
-<<<<<<< HEAD
 // inititiqte selectors
-=======
-
-// instantiate the selectors
->>>>>>> 22aaa04fe745ab34e6cd99c453640d670cfb4762
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const selectBrands = document.querySelector('#brand-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
+const spanNbNewProducts = document.querySelector('#nbNewProducts');
+const span50 = document.querySelector('#p50');
+const span90 = document.querySelector('#p90');
+const span95 = document.querySelector('#p95');
+const spanLastReleasedDate = document.querySelector('#lastReleasedDate');
 /**
  * Set global value
  * @param {Array} result - products to display
@@ -168,7 +168,6 @@ else{
 /**
  * Select the number of products to display
  */
-<<<<<<< HEAD
 selectShow.addEventListener('change', event => {
   fetchProducts(currentPagination.currentPage,parseInt(event.target.value))
     .then(setCurrentProducts)
@@ -204,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () =>
 );
 
 var buttonrel=false;
-function changeboolrel()
+function buttonReleased()
 { if (buttonrel==false){buttonrel=true}
 else buttonrel=false;
 console.log(buttonrel)
@@ -217,18 +216,3 @@ console.log(buttonrel)
 
 
 
-=======
-selectShow.addEventListener('change', async (event) => {
-  const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
-
-  setCurrentProducts(products);
-  render(currentProducts, currentPagination);
-});
-
-document.addEventListener('DOMContentLoaded', async () => {
-  const products = await fetchProducts();
-
-  setCurrentProducts(products);
-  render(currentProducts, currentPagination);
-});
->>>>>>> 22aaa04fe745ab34e6cd99c453640d670cfb4762
