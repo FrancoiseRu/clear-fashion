@@ -1,17 +1,14 @@
 // Invoking strict mode https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode#invoking_strict_mode
 'use strict';
-
 // current products on the page
 let currentProducts = [];
 let currentPagination = {};
-
 // inititiqte selectors
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const selectBrands = document.querySelector('#brand-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
-
 /**
  * Set global value
  * @param {Array} result - products to display
@@ -21,7 +18,6 @@ const setCurrentProducts = ({result, meta}) => {
   currentProducts = result;
   currentPagination = meta;
 };
-
 /**
  * Fetch products from api
  * @param  {Number}  [page=1] - current page to fetch
@@ -34,21 +30,16 @@ const fetchProducts = async (page = 1, size = 12) => {
       `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
     );
     const body = await response.json();
-
     if (body.success !== true) {
       console.error(body);
       return {currentProducts, currentPagination};
     }
-
     return body.data;
   } catch (error) {
     console.error(error);
     return {currentProducts, currentPagination};
   }
-
-
 };
-
 /**
  * Render list of products
  * @param  {Array} products
@@ -68,12 +59,10 @@ const renderProducts = products => {
     })
     .join('');
   div.innerHTML = template;
-
   fragment.appendChild(div);
   sectionProducts.innerHTML = '<h2>Products</h2>';
   sectionProducts.appendChild(fragment);
 };
-
 /**
  * Render page selector
  * @param  {Object} pagination
@@ -84,24 +73,17 @@ const renderPagination = pagination => {
     {'length': pageCount},
     (value, index) => `<option value="${index + 1}">${index + 1}</option>`
   ).join('');
-
   selectPage.innerHTML = options;
   selectPage.selectedIndex = currentPage - 1;
-
-
 };
-
 /**
  * Render page selector
  * @param  {Object} pagination
  */
 const renderIndicators = pagination => {
   const {count} = pagination;
-
   spanNbProducts.innerHTML = count;
 };
-
-
 /**
  * Render brand selector
  * @param  {Object} brand
@@ -122,11 +104,10 @@ const render = (products, pagination) => {
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
-
 };*/
 
 function newrelease(products){
-  const newProductRelease = [];
+  let newProductRelease = [];
   for (var i=0; i<products.length; i++)
   {
     if((Math.abs(Date.now()-Date.parse(products[i].released))/(1000 * 60 * 60 * 24))<14)
@@ -141,40 +122,44 @@ const render2 = (products, pagination,brandSelected) => {
   let brandstot=['No brand selected'];
     for (let step=0;step<products.length;step++)
     {
-       brandstot.push(products[step].brand);
+      brandstot.push(products[step].brand);
+       
     }
   brandstot=[ ... new Set(brandstot)]
-
+ 
   var const_brands={};
 for (var i=0; i<products.length; i++)
 {
+
   const_brands[products[i].brand]=[];
 }
 for (var i=0; i<products.length; i++)
 {
   const_brands[products[i].brand].push(products[i])
+ 
 }
-if (buttonrel===true){products=newrelease(products)
-  renderProducts(products);}
+if (buttonrel===true){
+  renderProducts(newrelease(products));
+}
+else{
+  if(brandSelected=='No brand selected' )
+  {
+    renderProducts(products);
+  }
+  else
+  {
+    renderProducts(const_brands[brandSelected]);
+  }
+}
+  
 
-if(brandSelected=='No brand selected')
-{
-  renderProducts(products);
-}
-else
-{
-  renderProducts(const_brands[brandSelected]);
-}
   renderPagination(pagination);
   renderIndicators(pagination);
   renderBrands(brandstot,brandSelected)
 }
-
-
 /**
  * Declaration of all Listeners
  */
-
 /**
  * Select the number of products to display
  * @type {[type]}
@@ -184,12 +169,22 @@ selectShow.addEventListener('change', event => {
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,'No brand selected'));
 });
-
 selectPage.addEventListener('change', event => {
+  console.log('page');
+  console.log(currentPagination.pageSize);
+  currentPagination.pageSize=currentPageSize(currentPagination.pageSize);
+  console.log(currentPagination.pageSize);
   fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,'No brand selected'));
+   
 });
+function currentPageSize(PageSizecurrent)
+{
+  if(PageSizecurrent>24 | PageSizecurrent==0){return 48;}
+  else if(PageSizecurrent>12){return 24;}
+  else {return 12;}
+}
 
 selectBrands.addEventListener('change', event => {
   fetchProducts(currentPagination.currentPage,currentPagination.pageSize)
@@ -198,7 +193,6 @@ selectBrands.addEventListener('change', event => {
 });
 
 document.addEventListener('DOMContentLoaded', () =>
-
   fetchProducts()
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,'No brand selected'))
@@ -212,7 +206,8 @@ console.log(buttonrel)
 {
   fetchProducts(currentPagination.currentPage, currentPagination.pageSize)
     .then(setCurrentProducts)
-    .then(() => render2(currentProducts, currentPagination,"No brand selected"));
+    .then(() => render2(currentProducts, currentPagination,'No brand selected'));
+    
 };}
 
 
