@@ -258,7 +258,7 @@ const render2 = (products, pagination,brandSelected) => {
   renderIndicatorsp90(products);
   renderIndicatorsp95(products);
   render_last_released_date(products);
-  renderBrands(brandstot,brandSelected)
+  renderBrands(brandstot,brandSelected);
 }
 /**
  * Declaration of all Listeners
@@ -296,11 +296,13 @@ selectSort.addEventListener('change',event =>{
   else if(event.target.value=="date-asc"){
     fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
     .then(setCurrentProducts)
-    .then(() => render2(sortbydateAsc(currentProducts), currentPagination,'No brand selected'))}
+    .then(() => render2(sortbydateAsc(currentProducts), currentPagination,'No brand selected'))
+  console.log(sortbydateAsc(currentProducts));}
   else if(event.target.value=="date-desc"){
     fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
     .then(setCurrentProducts)
-    .then(() => render2(sortbydateDesc(currentProducts), currentPagination,'No brand selected'))}
+    .then(() => render2(sortbydateDesc(currentProducts), currentPagination,'No brand selected'))
+  console.log(sortbydateDesc(currentProducts));}
   else {
     fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
     .then(setCurrentProducts)
