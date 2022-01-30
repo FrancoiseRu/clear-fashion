@@ -1,0 +1,30 @@
+html {
+    background-color: #e5e5dc;
+  }
+
+  body {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px 20px 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #e03c3c;
+    border: 20px solid transparent;
+  }
+
+ h2 {
+    color: #01189e;
+  }
+
+  #products {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  ul {
+    list-style: disc;
+  }
