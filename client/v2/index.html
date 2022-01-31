@@ -23,7 +23,7 @@
       </div>
       <div id="filters">
         <span>Filters :</span>
-        <button onclick=buttonReasonable()>By reasonable price</button>
+        <button onclick=buttonReasonable() name=reasonable>By reasonable price</button>
         <button onclick=buttonReleased()>By recently released</button>
         <button onclick=buttonFavourite()>By fav</button>
         <div id="brand">
@@ -55,15 +55,19 @@
       </div>
       <div>
         <li><span>p50 price value :</span>
-        <span id="p50">0</span></li>
+        <span id="p50">0</span>
+        <span>€</span>
+        </li>
       </div>
       <div>
         <li><span>p90 price value :</span>
-        <span id="p90">0</span></li>
+        <span id="p90">0</span>
+        <span>€</span></li>
       </div>
       <div>
         <li><span>p95 price value :</span>
-        <span id="p95">0</span></li>
+        <span id="p95">0</span>
+        <span>€</span></li>
       </div>
       <div>
         <li><span>Last released date :</span>
