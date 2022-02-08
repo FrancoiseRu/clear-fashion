@@ -7,6 +7,8 @@ const {'v5': uuidv5} = require('uuid');
  * @param  {String} data - html response
  * @return {Object} restaurant
  */
+
+/*
 const parse = data => {
   const $ = cheerio.load(data);
 
@@ -36,7 +38,7 @@ const parse = data => {
     })
     .get();
 };
-
+*/
 /**
  * Scrape all the products for a given url page
  * @param  {[type]}  url
