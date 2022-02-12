@@ -3,20 +3,8 @@ const dedicatedbrand = require('./sites/dedicatedbrand');
 const adresse = require('./sites/adresse');
 const montlimart = require('./sites/montlimart');
 
-
-'https://adresse.paris/630-toute-la-collection'
-'https://www.dedicatedbrand.com/en/loadfilter?'
-'https://www.montlimart.com/toute-la-collection.html?p=8'
-//async function sandbox (eshop ='https://www.montlimart.com/toute-la-collection.html?p=8'){
   async function sandbox (){
   try {
-    //console.log(`🕵️‍♀️  browsing ${eshop} source`);
-
-    //const products = await montlimart.scrape(eshop);
-    //console.log(products.length)
-    //console.log(products);
-
-
     let productsadressse = [];
     let pagesadresse = [
       'https://adresse.paris/630-toute-la-collection',
@@ -24,8 +12,6 @@ const montlimart = require('./sites/montlimart');
     ];
 
     console.log(`🕵️‍♀️  browsing ${pagesadresse.length} pages with for...of`);
-
-    // Way 1 with for of: we scrape page by page
     for (let pageadresse of pagesadresse) {
       console.log(`🕵️‍♀️  scraping ${pageadresse}`);
 
@@ -52,8 +38,6 @@ const montlimart = require('./sites/montlimart');
     ];
 
     console.log(`🕵️‍♀️  browsing ${pagesmontlimart.length} pages with for...of`);
-
-    // Way 1 with for of: we scrape page by page
     for (let pagemontlimart of pagesmontlimart) {
       console.log(`🕵️‍♀️  scraping ${pagemontlimart}`);
 
@@ -75,8 +59,6 @@ const montlimart = require('./sites/montlimart');
     ];
 
     console.log(`🕵️‍♀️  browsing ${pagesdedicated.length} pages with for...of`);
-
-    // Way 1 with for of: we scrape page by page
     for (let pagededicated of pagesdedicated) {
       console.log(`🕵️‍♀️  scraping ${pagededicated}`);
 
