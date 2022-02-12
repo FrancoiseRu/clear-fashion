@@ -28,7 +28,9 @@ const parse = data => {
         .attr('title'),
 
         'photo': $(element)
-          .find('.product-image a img').attr('src'),
+          .find('.product-image a img')
+          .attr('src'),
+
         '_id': uuidv5(link, uuidv5.URL)
       };
     })

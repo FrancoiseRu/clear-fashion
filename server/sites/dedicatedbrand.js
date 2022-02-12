@@ -52,7 +52,7 @@ module.exports.scrape = async url => {
       const body = await response.json();
       let final = [];
         body.products.forEach((element) => {
-            if(element.name!=undefined)
+            if(element.name!=undefined &&element["canonicalUri"].startsWith('men') )
       {final.push({
         name: element["name"],
         brand: "dedicated",
