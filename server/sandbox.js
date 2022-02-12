@@ -21,6 +21,7 @@ const montlimart = require('./sites/montlimart');
 
       productsadressse.push(productpageadressse);
     }
+    productsadressse = productsadressse.flat();
     console.log('done for adresse');
 
 
@@ -47,7 +48,12 @@ const montlimart = require('./sites/montlimart');
 
       productsmontlimart.push(productpagemontlimart);
     }
-    //supprimer la carte cadeau
+    productsmontlimart = productsmontlimart.flat();
+    productsmontlimart.forEach((element, index) => {
+          if (element.name === 'Carte Cadeau Montlimart') {
+            productsmontlimart.splice(index,1);
+          }
+        });
     console.log('done for montlimart');
 
 
@@ -68,6 +74,7 @@ const montlimart = require('./sites/montlimart');
 
       productsdedicated.push(productpagededicated);
     }
+    productsdedicated = productsdedicated.flat();
     console.log('done for dedicated');
 
 
