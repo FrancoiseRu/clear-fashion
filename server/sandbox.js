@@ -2,6 +2,7 @@
 const dedicatedbrand = require('./sites/dedicatedbrand');
 const adresse = require('./sites/adresse');
 const montlimart = require('./sites/montlimart');
+const fs = require('fs');
 
   async function sandbox (){
   try {
@@ -23,7 +24,7 @@ const montlimart = require('./sites/montlimart');
     }
     productsadressse = productsadressse.flat();
     console.log('done for adresse');
-
+    fs.writeFileSync('productsadresse.json', JSON.stringify(productsadressse));
 
 
     let productsmontlimart = [];
@@ -55,6 +56,7 @@ const montlimart = require('./sites/montlimart');
           }
         });
     console.log('done for montlimart');
+    fs.writeFileSync('productsmontlimart.json', JSON.stringify(productsmontlimart));
 
 
 
@@ -75,6 +77,7 @@ const montlimart = require('./sites/montlimart');
       productsdedicated.push(productpagededicated);
     }
     productsdedicated = productsdedicated.flat();
+    fs.writeFileSync('productsdedicated.json', JSON.stringify(productsdedicated));
     console.log('done for dedicated');
 
 
