@@ -27,7 +27,7 @@ const montlimart = require('./sites/montlimart');
 
     let productsmontlimart = [];
     let pagesmontlimart = [
-      //'https://www.montlimart.com/toute-la-collection.html?p=1',
+      'https://www.montlimart.com/toute-la-collection.html?p=1',
       'https://www.montlimart.com/toute-la-collection.html?p=2',
       'https://www.montlimart.com/toute-la-collection.html?p=3',
       'https://www.montlimart.com/toute-la-collection.html?p=4',
