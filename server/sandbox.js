@@ -3,6 +3,8 @@ const dedicatedbrand = require('./sites/dedicatedbrand');
 const adresse = require('./sites/adresse');
 const montlimart = require('./sites/montlimart');
 const fs = require('fs');
+const mongo = require('./mongo-db');
+
 
   async function sandbox (){
   try {
@@ -25,7 +27,7 @@ const fs = require('fs');
     productsadressse = productsadressse.flat();
     console.log('done for adresse');
     fs.writeFileSync('productsadresse.json', JSON.stringify(productsadressse));
-
+    mongo.insert(productsadressse);
 
     let productsmontlimart = [];
     let pagesmontlimart = [
