@@ -6,9 +6,10 @@ const fs = require('fs');
 const mongo = require('./mongo-db');
 
 
-  async function sandbox (){
+async function sandbox (){
   try {
-    let productsadressse = [];
+    let products = [];
+
     let pagesadresse = [
       'https://adresse.paris/630-toute-la-collection',
       'https://adresse.paris/630-toute-la-collection?p=2'
@@ -22,14 +23,11 @@ const mongo = require('./mongo-db');
 
       console.log(`👕 ${productpageadressse.length} products found`);
 
-      productsadressse.push(productpageadressse);
+      products.push(productpageadressse);
     }
-    productsadressse = productsadressse.flat();
+    //products = products.flat();
     console.log('done for adresse');
-    fs.writeFileSync('productsadresse.json', JSON.stringify(productsadressse));
-    mongo.insert(productsadressse);
-
-    let productsmontlimart = [];
+ 
     let pagesmontlimart = [
       'https://www.montlimart.com/toute-la-collection.html?p=1',
       'https://www.montlimart.com/toute-la-collection.html?p=2',
@@ -49,21 +47,19 @@ const mongo = require('./mongo-db');
 
       console.log(`👕 ${productpagemontlimart.length} products found`);
 
-      productsmontlimart.push(productpagemontlimart);
+      products.push(productpagemontlimart);
     }
-    productsmontlimart = productsmontlimart.flat();
-    productsmontlimart.forEach((element, index) => {
+    /*
+    products = products.flat();
+    products.forEach((element, index) => {
           if (element.name === 'Carte Cadeau Montlimart') {
-            productsmontlimart.splice(index,1);
+            products.splice(index,1);
           }
-        });
+        });*/
     console.log('done for montlimart');
-    fs.writeFileSync('productsmontlimart.json', JSON.stringify(productsmontlimart));
 
 
 
-
-    let productsdedicated = [];
     let pagesdedicated = [
       'https://www.dedicatedbrand.com/en/loadfilter?'
     ];
@@ -76,12 +72,24 @@ const mongo = require('./mongo-db');
 
       console.log(`👕 ${productpagededicated.length} products found`);
 
-      productsdedicated.push(productpagededicated);
+      products.push(productpagededicated);
     }
-    productsdedicated = productsdedicated.flat();
-    fs.writeFileSync('productsdedicated.json', JSON.stringify(productsdedicated));
+    //products = products.flat();
+    fs.writeFileSync('productsAll.json', JSON.stringify(products));
     console.log('done for dedicated');
 
+    products = products.flat();
+    products.forEach((element, index) => {
+      if (element.name === 'Carte Cadeau Montlimart') {
+        products.splice(index,1);
+      }
+    });
+
+    console.log(products)
+    
+    console.log("avant mongo");
+    mongo.insert(products);
+    console.log("apres mongo");
 
     process.exit(0);
 
