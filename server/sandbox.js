@@ -4,10 +4,14 @@ const adresse = require('./sites/adresse');
 const montlimart = require('./sites/montlimart');
 const fs = require('fs');
 const mongo = require('./mongo-db');
+const { insert } = require('./mongo-db');
+const { connect } = require('./mongo-db');
 
 
 async function sandbox (){
   try {
+
+    mongo.connect();
     let products = [];
 
     let pagesadresse = [
@@ -75,10 +79,12 @@ async function sandbox (){
       products.push(productpagededicated);
     }
     //products = products.flat();
+
+    
+    products = products.flat();
     fs.writeFileSync('productsAll.json', JSON.stringify(products));
     console.log('done for dedicated');
 
-    products = products.flat();
     products.forEach((element, index) => {
       if (element.name === 'Carte Cadeau Montlimart') {
         products.splice(index,1);
@@ -88,10 +94,10 @@ async function sandbox (){
     console.log(products)
     
     console.log("avant mongo");
-    mongo.insert(products);
+    insert(products);
     console.log("apres mongo");
 
-    process.exit(0);
+    //process.exit(0);
 
   } catch (e) {
     console.error(e);
