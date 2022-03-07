@@ -1,3 +1,5 @@
+const mongo = require('./mongo-db');
+
 const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
@@ -17,6 +19,28 @@ app.options('*', cors());
 app.get('/', (request, response) => {
   response.send({'ack': true});
 });
+
+app.get('/products', async(request, response) => {
+  await mongo.connect();
+  const prod= await mongo.find();
+  response.send(prod);
+});
+
+app.get('/:id', async(request, response) => {
+  await mongo.connect();
+  const idprod= await mongo.find({'_id':request.params.id});
+  response.send(idprod);
+});
+
+/*
+const lessPrice = 200;
+  
+  await mongo.connect();
+  const prod= await mongo.find({'price':{$lt:lessPrice}});
+  response.send(prod);*/
+
+
+
 
 app.listen(PORT);
 

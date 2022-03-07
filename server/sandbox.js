@@ -80,14 +80,26 @@ async function sandbox (){
     });
     await mongo.insert(products);
    
-    const brandSelect = 'montlimart';
-    const brandOnly = await  mongo.find({'brand':brandSelect});
+    let brandSelect = 'montlimart';
+    let brandOnly = await  mongo.find({'brand':brandSelect});
+    console.log('number of articles of '+brandSelect + ' : '+brandOnly.length);
+
+    brandSelect = 'adresse paris';
+    brandOnly = await  mongo.find({'brand':brandSelect});
+    console.log('number of articles of '+brandSelect + ' : '+brandOnly.length);
+
+    brandSelect = 'dedicated';
+    brandOnly = await  mongo.find({'brand':brandSelect});
     console.log('number of articles of '+brandSelect + ' : '+brandOnly.length);
 
     //pour l'instant fait egale a 100 et non inférieur a 100
     const lessPrice = 200;
     const lessPriceOnly = await  mongo.find({'price':{$lt:lessPrice}});
     console.log('number of articles less than '+lessPrice + ' : '+lessPriceOnly.length);
+    
+    const highPrice = 200;
+    const highPriceOnly = await  mongo.find({'price':{$gte:highPrice}});
+    console.log('number of articles less than '+highPrice + ' : '+highPriceOnly.length);
     
     
     const sortByPrice = await  mongo.sort();
