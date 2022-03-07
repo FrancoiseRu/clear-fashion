@@ -92,7 +92,6 @@ async function sandbox (){
     brandOnly = await  mongo.find({'brand':brandSelect});
     console.log('number of articles of '+brandSelect + ' : '+brandOnly.length);
 
-    //pour l'instant fait egale a 100 et non inférieur a 100
     const lessPrice = 200;
     const lessPriceOnly = await  mongo.find({'price':{$lt:lessPrice}});
     console.log('number of articles less than '+lessPrice + ' : '+lessPriceOnly.length);

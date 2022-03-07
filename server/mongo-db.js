@@ -23,7 +23,7 @@ module.exports.insert = async (products)=>{
         return result;
     } 
     catch (error) {
-        console.log('tout a ete scrapper')
+        console.log('everything is already insert')
        // console.error(error);
         //process.exit(1);
     };

@@ -53,8 +53,11 @@ app.get('/products/:search', async(request, response) => {
   if(request.query.slice==null)
   { limit=12}
   searchprod=searchprod.slice(0,limit);
+  
   response.send(searchprod);
 });
+
+//The results array should be sorted by price in ascending way.
 
 
 app.listen(PORT);
