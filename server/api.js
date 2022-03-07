@@ -32,6 +32,24 @@ app.get('/:id', async(request, response) => {
   response.send(idprod);
 });
 
+
+app.get('/products/:search', async(request, response) => {
+  await mongo.connect();
+  const query= request.query
+  const toFind={}
+  
+  if(request.query.price!=null)
+  {
+    toFind['price'] = parseInt(request.query.price);
+  }
+  if(request.query.brand!= null)
+  {
+    toFind['brand'] = request.query.brand;
+  }
+    
+  searchprod= await mongo.find(toFind);
+  response.send(searchprod);
+});
 /*
 const lessPrice = 200;
   
