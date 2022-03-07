@@ -40,7 +40,7 @@ app.get('/products/:search', async(request, response) => {
 
   if(request.query.price!=null)
   {
-    toFind['price'] = parseInt(request.query.price);
+    toFind['price'] = parseFloat(request.query.price);
   }
   if(request.query.brand!= null)
   {
@@ -52,18 +52,9 @@ app.get('/products/:search', async(request, response) => {
   let limit=request.query.slice;
   if(request.query.slice==null)
   { limit=12}
-
   searchprod=searchprod.slice(0,limit);
   response.send(searchprod);
 });
-/*
-const lessPrice = 200;
-  
-  await mongo.connect();
-  const prod= await mongo.find({'price':{$lt:lessPrice}});
-  response.send(prod);*/
-
-
 
 
 app.listen(PORT);
