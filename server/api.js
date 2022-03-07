@@ -37,7 +37,7 @@ app.get('/products/:search', async(request, response) => {
   await mongo.connect();
   const query= request.query
   const toFind={}
-  
+
   if(request.query.price!=null)
   {
     toFind['price'] = parseInt(request.query.price);
@@ -48,6 +48,12 @@ app.get('/products/:search', async(request, response) => {
   }
     
   searchprod= await mongo.find(toFind);
+
+  let limit=request.query.slice;
+  if(request.query.slice==null)
+  { limit=12}
+
+  searchprod=searchprod.slice(0,limit);
   response.send(searchprod);
 });
 /*
