@@ -25,6 +25,8 @@ const spanLastReleasedDate = document.querySelector('#lastReleasedDate');
 const setCurrentProducts = ({result, meta}) => {
   currentProducts = result;
   currentPagination = meta;
+  console.log("meta");
+  console.log(meta);
 };
 /**
  * Fetch products from api
@@ -36,15 +38,16 @@ const fetchProducts = async (page = 1, size = 12) => {
   try {
     const response = await fetch(
      // `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
-     //`https://server-ashy.vercel.app?page=${page}&size=${size}`
-     `https://server-one-eta.vercel.app?page=${page}&size=${size} `
+     `https://server-six-iota.vercel.app/products?page=${page}&size=${size}`
     );
     const body = await response.json();
+    console.log(response);
     if (body.success !== true) {
       console.error(body);
       return {currentProducts, currentPagination};
     }
     return body.data;
+    
   } catch (error) {
     console.error(error);
     return {currentProducts, currentPagination};
