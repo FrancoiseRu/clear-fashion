@@ -21,7 +21,7 @@ app.options('*', cors());
 app.get('/', (request, response) => {
   response.send({'ack': true});
 });*/
-
+/*
 app.get('/products', async(request, response) => {
   await mongo.connect();
   var prod= await mongo.find();
@@ -52,7 +52,7 @@ app.get('/products', async(request, response) => {
     dict["data"]=dict2;
   
   response.send(dict);
-});
+});*/
 
 app.get('/products/:search', async(request, response) => {
   
@@ -61,7 +61,7 @@ app.get('/products/:search', async(request, response) => {
 
   const paginate = (currentPage, count, rows, pageLimit ) => {
     const meta = {
-      currentPage: Number(currentPage) || 1,
+      currentPage: Number(currentPage) ,
       pageCount: Math.ceil(count / Number(pageLimit)),
       pageSize: rows.length,
       count
@@ -79,7 +79,7 @@ app.get('/products/:search', async(request, response) => {
     const meta = paginate(parseInt(request.query.page), count, rows,parseInt(request.query.size))
     
   
-  prod=prod.slice(parseInt(request.query.page)*parseInt(request.query.size)-parseInt(request.query.size),parseInt(request.query.size));
+  prod=prod.slice(((parseInt(request.query.page)*parseInt(request.query.size))-parseInt(request.query.size)),(parseInt(request.query.page)*parseInt(request.query.size)));
 
   var dict ={};
   dict["success"]=true;
