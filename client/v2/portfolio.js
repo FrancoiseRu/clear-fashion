@@ -25,8 +25,6 @@ const spanLastReleasedDate = document.querySelector('#lastReleasedDate');
 const setCurrentProducts = ({result, meta}) => {
   currentProducts = result;
   currentPagination = meta;
-  console.log("meta");
-  console.log(meta);
 };
 /**
  * Fetch products from api
@@ -38,10 +36,9 @@ const fetchProducts = async (page = 1, size = 12) => {
   try {
     const response = await fetch(
      // `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
-     `https://server-olive-ten.vercel.app/products/search?page=${page}&size=${size}`
+     `https://server-gules-theta.vercel.app/search?page=${page}&size=${size}`
     );
     const body = await response.json();
-    console.log(response);
     if (body.success !== true) {
       console.error(body);
       return {currentProducts, currentPagination};
@@ -53,8 +50,27 @@ const fetchProducts = async (page = 1, size = 12) => {
     return {currentProducts, currentPagination};
   }
 };
+
+ async function fetchAllProducts() {
+  try{
+  const response = await fetch(
+    // `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
+    `https://server-gules-theta.vercel.app/products`);
+  const body = await response.json();
+  return Promise.resolve(body.data.result);
+}
+  catch(e) {
+    return null;
+  }
+}
+
+
+
 function favourite(uuidElement)
-{favouriteuuid.push(uuidElement);}
+{
+  favouriteuuid.push(uuidElement);
+  //localStorage.setItem("name", uuidElement);
+}
 /**
  * Render list of products
  * @param  {Array} products
@@ -218,29 +234,34 @@ function sortbydateAsc(products){
     return products;}
 
 
-const render2 = (products, pagination,brandSelected) => {
+const render2 = async(products, pagination,brandSelected) => {
+ 
   if (buttonReleasedbool==true)
     {products=newrelease(products);}
   if(buttonReasonablebool==true)
     {products=reasonable(products);}
   if (buttonfavouritebool==true)
     {
+      let allprod= await fetchAllProducts();
+      
+  
       favouritelist=[];
       favouriteuuid=[ ... new Set(favouriteuuid)]
-      console.log('favoriteuuid');
-      console.log(favouriteuuid);
+      
       favouriteuuid.forEach(element => {
-        products.forEach(elemuuid=> {
+        allprod.forEach(elemuuid=> {
           if (element==elemuuid._id & favouritelist.indexOf(elemuuid) <0)
-          {favouritelist.push(elemuuid);}
-          console.log('favouritelist');
-          console.log(favouritelist);
+          {
+            //favouritelist.push(elemuuid);
+            //
+            localStorage.setItem(elemuuid._id, (JSON.stringify(elemuuid)));
+            favouritelist.push(JSON.parse(localStorage.getItem(elemuuid._id)));
+          }
         })  
       });
       favouritelist=[ ... new Set(favouritelist)]
       products=favouritelist;
-      console.log('products');
-      console.log(products);
+      //products=localStorage;   
     }
   let brandstot=['No brand selected'];
   for (let step=0;step<products.length;step++)
@@ -307,13 +328,11 @@ selectSort.addEventListener('change',event =>{
   else if(event.target.value=="date-asc"){
     fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
     .then(setCurrentProducts)
-    .then(() => render2(sortbydateAsc(currentProducts), currentPagination,'No brand selected'))
-  console.log(sortbydateAsc(currentProducts));}
+    .then(() => render2(sortbydateAsc(currentProducts), currentPagination,'No brand selected'))}
   else if(event.target.value=="date-desc"){
     fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
     .then(setCurrentProducts)
-    .then(() => render2(sortbydateDesc(currentProducts), currentPagination,'No brand selected'))
-  console.log(sortbydateDesc(currentProducts));}
+    .then(() => render2(sortbydateDesc(currentProducts), currentPagination,'No brand selected'))}
   else {
     fetchProducts(currentPagination.currentPage,parseInt(selectShow.value))
     .then(setCurrentProducts)

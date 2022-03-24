@@ -21,7 +21,7 @@ app.options('*', cors());
 app.get('/', (request, response) => {
   response.send({'ack': true});
 });*/
-/*
+
 app.get('/products', async(request, response) => {
   await mongo.connect();
   var prod= await mongo.find();
@@ -52,9 +52,9 @@ app.get('/products', async(request, response) => {
     dict["data"]=dict2;
   
   response.send(dict);
-});*/
+});
 
-app.get('/products/:search', async(request, response) => {
+app.get('/:search', async(request, response) => {
   
   await mongo.connect();
   var prod= await mongo.find();
@@ -94,12 +94,13 @@ app.get('/products/:search', async(request, response) => {
   response.send(dict);
 
 });
-
+/*
 app.get('/:id', async(request, response) => {
   await mongo.connect();
   const idprod= await mongo.find({'_id':request.params.id});
   response.send(idprod);
 });
+*/
 
 /*
 app.get('/products/:search', async(request, response) => {
