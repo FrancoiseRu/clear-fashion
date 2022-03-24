@@ -3,8 +3,6 @@
 // current products on the page
 let currentProducts = [];
 let currentPagination = {};
-let favouriteuuid =[];
-let favouritelist=[];
 // inititiqte selectors
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
@@ -66,10 +64,15 @@ const fetchProducts = async (page = 1, size = 12) => {
 
 
 
-function favourite(uuidElement)
+async function favourite(uuidElement)
 {
-  favouriteuuid.push(uuidElement);
-  //localStorage.setItem("name", uuidElement);
+  let allprod= await fetchAllProducts();
+  allprod.forEach(element=> {
+      if (uuidElement==element._id)
+      {
+        localStorage.setItem(element._id, (JSON.stringify(element)));
+      }
+    });
 }
 /**
  * Render list of products
@@ -242,23 +245,11 @@ const render2 = async(products, pagination,brandSelected) => {
     {products=reasonable(products);}
   if (buttonfavouritebool==true)
     {
-      let allprod= await fetchAllProducts();
-      
+      let favouritelist=[];
+    
+        Object.keys(localStorage).forEach(function(key){
+          favouritelist.push(JSON.parse(localStorage.getItem(key)))});
   
-      favouritelist=[];
-      favouriteuuid=[ ... new Set(favouriteuuid)]
-      
-      favouriteuuid.forEach(element => {
-        allprod.forEach(elemuuid=> {
-          if (element==elemuuid._id & favouritelist.indexOf(elemuuid) <0)
-          {
-            //favouritelist.push(elemuuid);
-            //
-            localStorage.setItem(elemuuid._id, (JSON.stringify(elemuuid)));
-            favouritelist.push(JSON.parse(localStorage.getItem(elemuuid._id)));
-          }
-        })  
-      });
       favouritelist=[ ... new Set(favouritelist)]
       products=favouritelist;
       //products=localStorage;   
