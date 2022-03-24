@@ -65,11 +65,11 @@ const renderProducts = products => {
   const template = products
     .map(product => {
       return `
-      <div class="product" id=${product.uuid}>
+      <div class="product" id=${product._id}>
         <span>${product.brand}</span>
         <a href="${product.link}" target="_blank">${product.name}</a>
         <span>${product.price}</span>
-        <button onclick=favourite("${product.uuid}")>fav</button>
+        <button onclick=favourite("${product._id}")>fav</button>
       </div>
     `;
     })
@@ -227,14 +227,20 @@ const render2 = (products, pagination,brandSelected) => {
     {
       favouritelist=[];
       favouriteuuid=[ ... new Set(favouriteuuid)]
+      console.log('favoriteuuid');
+      console.log(favouriteuuid);
       favouriteuuid.forEach(element => {
         products.forEach(elemuuid=> {
-          if (element==elemuuid.uuid & favouritelist.indexOf(elemuuid) <0)
+          if (element==elemuuid._id & favouritelist.indexOf(elemuuid) <0)
           {favouritelist.push(elemuuid);}
+          console.log('favouritelist');
+          console.log(favouritelist);
         })  
       });
       favouritelist=[ ... new Set(favouritelist)]
       products=favouritelist;
+      console.log('products');
+      console.log(products);
     }
   let brandstot=['No brand selected'];
   for (let step=0;step<products.length;step++)
