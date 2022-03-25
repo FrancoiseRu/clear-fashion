@@ -23,9 +23,10 @@
       </div>
       <div id="filters">
         <span>Filters :</span>
-        <button onclick=buttonReasonable() name=reasonable>By reasonable price</button>
-        <button onclick=buttonReleased()>By recently released</button>
-        <button onclick=buttonFavourite()>By fav</button>
+        <input type="checkbox" id="reasonable" value="reasonable">
+        <label for="reasonable">By reasonable price</label>
+        <input type="checkbox" id="released" value="released">
+        <label for="released">By recently released</label>
         <input type="checkbox" id="fav" value="fav">
         <label for="fav">By fav</label>
         <button onclick=buttonDeleteFavourite()>Clear favorites</button>

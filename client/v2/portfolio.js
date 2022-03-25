@@ -339,27 +339,37 @@ document.addEventListener('DOMContentLoaded', () =>
     .then(() => render2(currentProducts, currentPagination,'No brand selected'))
 );
 
-var buttonReleasedbool=false;
-function buttonReleased()
-{ if (buttonReleasedbool==false){buttonReleasedbool=true;}
-else {buttonReleasedbool=false;}
-{
-  fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
-    .then(setCurrentProducts)
-    .then(() => render2(currentProducts, currentPagination,'No brand selected'));
-};}
 
+
+var releasedCheckbox = document.querySelector('input[value="released"]');
+var buttonReleasedbool=false;
+releasedCheckbox.onchange = function buttonReleased() {
+  if(releasedCheckbox.checked) 
+    {buttonReleasedbool=true;}
+  else {buttonReleasedbool=false;}
+    {
+      fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
+        .then(setCurrentProducts)
+        .then(() => render2(currentProducts, currentPagination,"No brand selected"));
+    };
+}
+
+
+var reasonableCheckbox = document.querySelector('input[value="reasonable"]');
 var buttonReasonablebool=false;
-function buttonReasonable()
-{ if (buttonReasonablebool==false){buttonReasonablebool=true;}
-else {buttonReasonablebool=false;}
-{
-  fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
-    .then(setCurrentProducts)
-    .then(() => render2(currentProducts, currentPagination,"No brand selected"));
-};}
+reasonableCheckbox.onchange = function buttonReasonable() {
+  if(reasonableCheckbox.checked) 
+    {buttonReasonablebool=true;}
+  else {buttonReasonablebool=false;}
+    {
+      fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
+        .then(setCurrentProducts)
+        .then(() => render2(currentProducts, currentPagination,"No brand selected"));
+    };
+}
+
 var favCheckbox = document.querySelector('input[value="fav"]');
-var buttonfavouritebool=false
+var buttonfavouritebool=false;
 favCheckbox.onchange = function buttonFavourite() {
   if(favCheckbox.checked) 
     {buttonfavouritebool=true;}
@@ -368,7 +378,8 @@ favCheckbox.onchange = function buttonFavourite() {
       fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
         .then(setCurrentProducts)
         .then(() => render2(currentProducts, currentPagination,"No brand selected"));
-    };}
+    };
+}
 
 
 
