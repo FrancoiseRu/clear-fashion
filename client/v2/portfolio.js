@@ -55,8 +55,7 @@ const fetchProducts = async (page = 1, size = 12) => {
     // `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
     `https://server-gules-theta.vercel.app/products`);
   const body = await response.json();
-  return Promise.resolve(body.data.result);
-}
+  return Promise.resolve(body.data.result);}
   catch(e) {
     return null;
   }
@@ -246,13 +245,15 @@ const render2 = async(products, pagination,brandSelected) => {
   if (buttonfavouritebool==true)
     {
       let favouritelist=[];
-    
+      if(localStorage.length>0)
+      {
         Object.keys(localStorage).forEach(function(key){
           favouritelist.push(JSON.parse(localStorage.getItem(key)))});
   
-      favouritelist=[ ... new Set(favouritelist)]
+        favouritelist=[ ... new Set(favouritelist)]
+      }
+        
       products=favouritelist;
-      //products=localStorage;   
     }
   let brandstot=['No brand selected'];
   for (let step=0;step<products.length;step++)
@@ -357,13 +358,29 @@ else {buttonReasonablebool=false;}
     .then(setCurrentProducts)
     .then(() => render2(currentProducts, currentPagination,"No brand selected"));
 };}
-
+var favCheckbox = document.querySelector('input[value="fav"]');
 var buttonfavouritebool=false
-function buttonFavourite()
-{ if (buttonfavouritebool==false){buttonfavouritebool=true;}
-else {buttonfavouritebool=false;}
-{
-  fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
-    .then(setCurrentProducts)
-    .then(() => render2(currentProducts, currentPagination,"No brand selected"));
-};}
+favCheckbox.onchange = function buttonFavourite() {
+  if(favCheckbox.checked) 
+    {buttonfavouritebool=true;}
+  else {buttonfavouritebool=false;}
+    {
+      fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
+        .then(setCurrentProducts)
+        .then(() => render2(currentProducts, currentPagination,"No brand selected"));
+    };}
+
+
+
+function buttonDeleteFavourite()
+{ 
+  localStorage.clear();
+  {
+    fetchProducts(currentPagination.currentPage, parseInt(selectShow.value))
+      .then(setCurrentProducts)
+      .then(() => render2(currentProducts, currentPagination,"No brand selected"));
+  }
+}
+
+
+//localStorage.clear();
