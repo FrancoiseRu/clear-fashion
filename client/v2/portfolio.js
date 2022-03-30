@@ -34,7 +34,7 @@ const fetchProducts = async (page = 1, size = 12) => {
   try {
     const response = await fetch(
      // `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
-     `https://server-gules-theta.vercel.app/search?page=${page}&size=${size}`
+     `https://server-omega-plum.vercel.app/search?page=${page}&size=${size}`
     );
     const body = await response.json();
     if (body.success !== true) {
@@ -53,7 +53,7 @@ const fetchProducts = async (page = 1, size = 12) => {
   try{
   const response = await fetch(
     // `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
-    `https://server-gules-theta.vercel.app/products`);
+    `https://server-omega-plum.vercel.app/products`);
   const body = await response.json();
   return Promise.resolve(body.data.result);}
   catch(e) {

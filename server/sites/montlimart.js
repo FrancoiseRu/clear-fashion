@@ -15,6 +15,9 @@ const {'v5': uuidv5} = require('uuid');
       const link = $(element).parent()
         .find('.product-name a')
         .attr('href');
+        var rand=Math.floor(Math.random()*(3));
+        var rand2=Math.floor(Math.random()*28);
+        var date=new Date(2022,rand,rand2);
         
       return {
         link,
@@ -29,7 +32,8 @@ const {'v5': uuidv5} = require('uuid');
 
         'photo': $(element).parent().parent()
           .find('.product-image a img').attr('src'),
-        '_id': uuidv5(link, uuidv5.URL)
+        '_id': uuidv5(link, uuidv5.URL),
+        'released':date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
       };
     })
     .get();
