@@ -49,8 +49,8 @@ module.exports.scrape = async url => {
     const response = await fetch(url);
 
     if (response.ok) {
-      var rand=Math.floor(Math.random()*(3));
-      var rand2=Math.floor(Math.random()*28);
+      var rand=Math.floor(Math.random()*(3))+1;
+      var rand2=Math.floor(Math.random()*28)+1;
       var date=new Date(2022,rand,rand2);
       const body = await response.json();
       let final = [];
@@ -63,7 +63,7 @@ module.exports.scrape = async url => {
         image: element["image"][0],
         link: "https://www.dedicatedbrand.com/en/" + element["canonicalUri"],
         _id: uuidv5("https://www.dedicatedbrand.com/en/" + element["canonicalUri"], uuidv5.URL),
-        released: date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+        released: date.getFullYear() + "-" + (date.getMonth()) + "-" + date.getDate()
       })};
     });
       return final;
