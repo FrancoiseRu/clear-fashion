@@ -84,9 +84,14 @@ const renderProducts = products => {
     .map(product => {
       return `
       <div class="product" id=${product._id}>
+        <img src="${product.photo}" alt="image produit" style="width:250px;height:300px;"/>
+        <br>
         <span>${product.brand}</span>
+        <br>
         <a href="${product.link}" target="_blank">${product.name}</a>
+        <br>
         <span>${product.price}</span>
+        <br>
         <button onclick=favourite("${product._id}")>fav</button>
       </div>
     `;
