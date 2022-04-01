@@ -7,14 +7,31 @@ html {
     margin: 0 auto;
     padding: 0 20px 20px 20px;
   }
+  
+  
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
 
   h1 {
     text-align: center;
     color: #e03c3c;
     border: 20px solid transparent;
+    text-shadow: 2px 2px 5px #e03c3c;
+    animation-duration: 3s;
+    animation-name: slidein;
   }
 
  h2 {
+  text-align: center;
     color: #01189e;
   }
 /*
@@ -40,14 +57,20 @@ html {
     float: left;
     width: 25%;
     margin: 30px ;
+    
     /*margin: 25px 1.15%;*/
   }
   
- 
   ul {
     list-style: disc;
   }
-  
-  button:active{
-    background-color: coral;
+  button{
+    background-color: #e5e5dc;
+    color: black;
+    border: 2px solid #01189e;
   }
+  button:active{
+    background-color: #01189e;
+    
+  }
+  
